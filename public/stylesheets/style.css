@@ -1,0 +1,16 @@
+body {
+  background-color: #cdecff;
+  padding: 50px;
+  font: 13px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+a {
+  color: #00B7FF; }
+
+canvas {
+  background-color: #FFFFFF; }
+
+div#game {
+  border: 2px solid;
+  border-color: #252525; }
+
+/*# sourceMappingURL=style.css.map */
