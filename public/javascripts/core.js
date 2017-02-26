@@ -1,56 +1,30 @@
 /**
  * Created by swpark on 2017. 2. 25..
  */
-Crafty.init(600, 550, document.getElementById('game'));
-
-//여러 이미지 하나로 합치기로
-
-var assetsObj = {
-    "sprites": {
-        "assets/cat_sprite.png": {
-            tile: 64,
-            tileh: 64,
-            map: {
-                user_idle_start: [0, 0]
-            }
-        },
-		"assets/spin.png": {
-            tile: 514,
-            tileh: 450,
-            map: {
-                npc_idle_start: [0, 0]
-            }
-        },
-		"assets/mon.png":{
-			tile: 64,
-			tileh: 64,
-			map: {
-				mon_attack_start: [0, 2]
-			}
-		}
-    }
-};
-
-//Crafty.viewport.scale(2);
-
-Crafty.load(assetsObj, function(){
-	var count=0;
-	var movearr = [];
-	
+Crafty.scene("Main", function () {
 	npc.draw();
 	user.draw();
+	Crafty.audio.play("peaceful",-1,0.01);
 	
+	npc.list[4].entity.bind("EnterFrame",function(){
+		if(this.x < -299){
+			this.flag = 6;
+			this.unflip();		
+		}else if(this.x > 100){
+			this.flag = -6;
+			this.flip();
+		}
+		this.x = this.x + this.flag;
+	});
 	
+	//80때 토글, 0때 토글 
 	
-}, function(e){
-	
-	/*console.log(e);
-	console.log(e.loaded);
-	console.log(e.total);
-	console.log(e.percent);
-	console.log(e.src);
-	*/
-	//procress
-}, function(error){
-	//error
+	setInterval(function(){
+		npc.list[1].entity.x = user.list[0].entity.x - rand();
+		npc.list[1].entity.y = user.list[0].entity.y - rand();
+		npc.list[2].entity.x = user.list[0].entity.x - rand();
+		npc.list[2].entity.y = user.list[0].entity.y - rand();
+		npc.list[3].entity.x = user.list[0].entity.x - rand();
+		npc.list[3].entity.y = user.list[0].entity.y - rand();
+	},100);
 });
